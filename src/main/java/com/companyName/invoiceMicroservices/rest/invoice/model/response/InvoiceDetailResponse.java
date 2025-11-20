@@ -1,12 +1,13 @@
 package com.companyName.invoiceMicroservices.rest.invoice.model.response;
 
+import com.companyName.coreMicroservices.repository.entity.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,17 +18,9 @@ public class InvoiceDetailResponse {
     private Long id;
 
     @Getter @Setter
-    private LocalDate transaction_date;
+    private Long invoiceNumber;
 
     @Getter @Setter
-    private String transaction_description;
+    private List<Payment> payments = new ArrayList<>();
 
-    @Getter @Setter
-    private String fkUser;
-
-    @Getter @Setter
-    private BigDecimal amount;
-
-    @Getter @Setter
-    private String currency;
 }

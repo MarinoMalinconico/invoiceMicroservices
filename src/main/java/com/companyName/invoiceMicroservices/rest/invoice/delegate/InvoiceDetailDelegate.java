@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface InvoiceDetailDelegate {
 
-    List<InvoiceDetailResponse> getInvoiceDetail(String FkUser) throws InvalidParameterException ;
-    List<InvoiceDetailResponse> getInvoiceDetailJPA(String FkUser) throws InvalidParameterException ;
+    List<InvoiceDetailResponse> getInvoiceDetail(Long invoiceNumber) throws InvalidParameterException ;
+    List<InvoiceDetailResponse> getInvoiceDetailJPA(Long invoiceNumber) throws InvalidParameterException ;
     List<InvoiceDetailResponse> getAllJPA() throws InvalidParameterException ;
     List<InvoiceDetailResponse> addInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
     List<InvoiceDetailResponse> updateInvoiceDetail(Invoice invoice) throws InvalidParameterException ;

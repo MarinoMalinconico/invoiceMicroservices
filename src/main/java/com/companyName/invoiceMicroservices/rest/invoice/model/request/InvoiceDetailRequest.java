@@ -11,6 +11,6 @@ public class InvoiceDetailRequest {
 
     @Getter
     @Setter
-    private String cf;
+    private Long invoiceNumber;
 
 }

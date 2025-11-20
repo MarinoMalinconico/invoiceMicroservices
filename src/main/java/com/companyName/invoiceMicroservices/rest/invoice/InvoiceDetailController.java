@@ -28,18 +28,18 @@ public class InvoiceDetailController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponse(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
 
-        log.info("Entering in invoiceDetail service - PathVariable: [{}]", invoice.getCf());
+        log.info("Entering in invoiceDetail service - PathVariable: [{}]", invoice.getInvoiceNumber());
 
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetail(invoice.getCf());
+            delegateResult= delegate.getInvoiceDetail(invoice.getInvoiceNumber());
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
             } else {
                 //metti log "nessun dato trovato"
-                throw new InvoiceDetailException("No data found for request param: "+invoice.getCf());
+                throw new InvoiceDetailException("No data found for request param: "+invoice.getInvoiceNumber());
             }
             log.debug("result delegate.getInvoiceDetail(invoice) [{}]", response);
         } catch (InvalidParameterException  e){
@@ -60,14 +60,14 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponse(@RequestParam String FkUser) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponse(@RequestParam Long invoiceNumber) throws InvalidParameterException {
 
-        log.info("Entering in invoiceDetail service(param) - PathVariable: [{}]", FkUser);
+        log.info("Entering in invoiceDetail service(param) - PathVariable: [{}]", invoiceNumber);
 
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetail(FkUser);
+            delegateResult= delegate.getInvoiceDetail(invoiceNumber);
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
@@ -93,14 +93,14 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGET(@RequestParam String FkUser) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGET(@RequestParam Long invoiceNumber) throws InvalidParameterException {
 
-        log.info("Entering in invoiceDetail service(param)(JPA) - PathVariable: [{}]", FkUser);
+        log.info("Entering in invoiceDetail service(param)(JPA) - PathVariable: [{}]", invoiceNumber);
 
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(FkUser);
+            delegateResult= delegate.getInvoiceDetailJPA(invoiceNumber);
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
@@ -160,7 +160,7 @@ public class InvoiceDetailController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> addInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
 
-        log.info("Entering in add invoice of [{}]", invoice.getFkUser());
+        log.info("Entering in add invoice of [{}]", invoice.getInvoiceNumber());
 
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
@@ -192,7 +192,7 @@ public class InvoiceDetailController {
     produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
 
-        log.info("Entering in invoice update of [{}]",invoice.getFkUser());
+        log.info("Entering in invoice update of [{}]",invoice.getInvoiceNumber());
 
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
@@ -223,14 +223,14 @@ public class InvoiceDetailController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> deleteInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
 
-        log.info("Entering in invoice delete of [{}]",invoice.getFkUser());
+        log.info("Entering in invoice delete of [{}]",invoice.getInvoiceNumber());
 
         boolean deleted=false;
 
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(invoice.getFkUser());
+            delegateResult= delegate.getInvoiceDetailJPA(invoice.getInvoiceNumber());
             deleted=delegate.deleteInvoiceDetail(invoice);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);
@@ -245,7 +245,7 @@ public class InvoiceDetailController {
         } catch (Exception e) {
             log.error("ERROR {}",e.getMessage(), e);
         }
-        log.info(deleted ? "eseguita delete di {} - {}" : "errore nella delete di {}", invoice.getFkUser(),invoice.getId());
+        log.info(deleted ? "eseguita delete di {} - {}" : "errore nella delete di {}", invoice.getInvoiceNumber(),invoice.getId());
 
         return ResponseEntity
                 .ok()
@@ -253,19 +253,19 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/DeleteInvoiceByCf",
+    @RequestMapping(value = "/DeleteInvoiceByInvoiceNumber",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> deleteInvoiceByCf(@RequestBody Invoice invoice) throws InvalidParameterException {
 
-        log.info("Entering in invoice delete of [{}]",invoice.getFkUser());
+        log.info("Entering in invoice delete of [{}]",invoice.getInvoiceNumber());
 
         boolean deleted=false;
 
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(invoice.getFkUser());
+            delegateResult= delegate.getInvoiceDetailJPA(invoice.getInvoiceNumber());
             deleted=delegate.deleteInvoiceDetailByCf(invoice);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);
@@ -280,7 +280,7 @@ public class InvoiceDetailController {
         } catch (Exception e) {
             log.error("ERROR {}",e.getMessage(), e);
         }
-        log.info(deleted ? "eseguita delete di {} - {}" : "errore nella delete di {}", invoice.getFkUser(),invoice.getId());
+        log.info(deleted ? "eseguita delete di {} - {}" : "errore nella delete di {}", invoice.getInvoiceNumber(),invoice.getId());
 
         return ResponseEntity
                 .ok()

@@ -29,7 +29,8 @@
 							"host": [
 								"{{baseURL}}AddInvoice"
 							]
-						}
+						},
+						"description": "esempio con payment valorizzato\n\n```\n{\n    \"invoiceNumber\": 20240923,\n    \"payments\": [\n        {\n            \"transaction_date\": \"2024-09-23\",\n            \"transaction_description\": \"paolo\",\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\n            \"amount\": 3000.03,\n            \"currency\": \"AED\"\n        }\n    ]\n}\n\n ```\n\nesempio con payment a null\n\n```\n{\n    \"invoiceNumber\": 20240924,\n    \"payments\": null\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -92,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":17,\r\n    \"invoiceNumber\": 20240924,\r\n    \"payments\": [\r\n        {\r\n            \"transaction_date\": \"2024-09-23\",\r\n            \"transaction_description\": \"paola\",\r\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n            \"amount\": 3000.03,\r\n            \"currency\": \"AED\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\":1,\r\n    \"invoiceNumber\": 20240924,\r\n    \"payments\": [\r\n        {\r\n            \"transaction_date\": \"2024-09-23\",\r\n            \"transaction_description\": \"paol\",\r\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n            \"amount\": 3000.03,\r\n            \"currency\": \"AED\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,7 +105,8 @@
 							"host": [
 								"{{baseURL}}UpdateInvoice"
 							]
-						}
+						},
+						"description": "per collegare un payment a un invoice gia esistente,\n\nmetti id di invoice(es.1) e valori del payment(es.transaction_date...)\n\n```\n{\n    \"id\":1,\n    \"invoiceNumber\": 20240924,\n    \"payments\": [\n        {\n            \"transaction_date\": \"2024-09-23\",\n            \"transaction_description\": \"paol\",\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\n            \"amount\": 3000.03,\n            \"currency\": \"AED\"\n        }\n    ]\n}\n\n ```"
 					},
 					"response": []
 				},

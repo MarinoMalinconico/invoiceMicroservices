@@ -1,6 +1,7 @@
 package com.companyName.invoiceMicroservices.rest.invoice;
 
 import com.companyName.coreMicroservices.repository.entity.Invoice;
+import com.companyName.coreMicroservices.repository.entity.Payment;
 import com.companyName.invoiceMicroservices.common.model.BasicResponse;
 import com.companyName.invoiceMicroservices.rest.invoice.delegate.InvoiceDetailDelegate;
 import com.companyName.invoiceMicroservices.rest.invoice.exceptions.InvoiceDetailException;
@@ -156,7 +157,7 @@ public class InvoiceDetailController {
     }
 
     @RequestMapping(value = "/AddInvoice",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> addInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
 
@@ -188,7 +189,7 @@ public class InvoiceDetailController {
     }
 
     @RequestMapping(value = "/UpdateInvoice",
-    method = RequestMethod.POST,
+    method = RequestMethod.PUT,
     produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
 
@@ -205,6 +206,31 @@ public class InvoiceDetailController {
                 //metti log "nessun dato trovato"
             }
             log.debug("result delegate.getInvoiceDetail(invoice) [{}]", response);
+        } catch (InvalidParameterException e) {
+            log.error("ERROR {}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("ERROR {}",e.getMessage(), e);
+        }
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @RequestMapping(value = "/AddPayment",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestBody Payment payment,@RequestParam Long invoiceId) throws InvalidParameterException {
+
+        log.info("Entering in AddPayment [{}]",invoiceId);
+
+        BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
+        try {
+            delegate.addPaymentToInvoice(invoiceId,payment);
+
+            log.debug("response [{}]", response);
         } catch (InvalidParameterException e) {
             log.error("ERROR {}", e.getMessage(), e);
             throw e;

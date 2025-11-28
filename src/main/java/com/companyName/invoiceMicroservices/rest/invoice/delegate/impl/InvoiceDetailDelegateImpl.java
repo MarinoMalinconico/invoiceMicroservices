@@ -2,6 +2,7 @@ package com.companyName.invoiceMicroservices.rest.invoice.delegate.impl;
 
 import com.companyName.coreMicroservices.repository.InvoiceRepository;
 import com.companyName.coreMicroservices.repository.entity.Invoice;
+import com.companyName.coreMicroservices.repository.entity.Payment;
 import com.companyName.invoiceMicroservices.rest.invoice.delegate.InvoiceDetailDelegate;
 import com.companyName.invoiceMicroservices.rest.invoice.model.response.InvoiceDetailResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -60,6 +62,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         return response;
     }
 
+    //togliere, va aggiunto in account e collegato
     @Override
     public List<InvoiceDetailResponse> addInvoiceDetail(Invoice invoice) {
         log.debug("Into addInvoiceDetail");
@@ -72,11 +75,25 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         return response;
     }
 
+    public void addPaymentToInvoice(Long invoiceId, Payment payment){
+        Optional<Invoice> invoice = repository.findById(invoiceId);
+        if (invoice.isEmpty()) {
+            throw new IllegalArgumentException("Invoice not found " + invoiceId);
+        }
+        invoice.get().getPayments().add(payment);
+        repository.save(invoice.get());
+    }
+
     @Override
     public List<InvoiceDetailResponse> updateInvoiceDetail(Invoice invoice) {
         log.debug("Into updateInvoiceDetail");
 
-        repository.save(new Invoice(invoice));
+        Optional<Invoice> currentInvoice = repository.findById(invoice.getId());
+        //vecchio metodo
+        //currentInvoice.get().setInvoiceNumber(invoice.getInvoiceNumber());
+        //currentInvoice.get().setPayments(currentInvoice.get().getPayments());
+        currentInvoice.get().updateInvoice(invoice);
+        repository.save(currentInvoice.get());
 
         List<Invoice> dbResult = repository.findByinvoiceNumber(invoice.getInvoiceNumber());
         List<InvoiceDetailResponse> response = dbResultToDto(dbResult);

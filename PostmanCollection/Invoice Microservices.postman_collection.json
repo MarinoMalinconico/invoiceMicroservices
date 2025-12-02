@@ -11,30 +11,6 @@
 			"name": "CRUD",
 			"item": [
 				{
-					"name": "CREATE addInvoiceDetailBasicResponse",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"invoiceNumber\": 20240923,\r\n    \"payments\": [\r\n        {\r\n            \"transaction_date\": \"2024-09-23\",\r\n            \"transaction_description\": \"paolo\",\r\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n            \"amount\": 3000.03,\r\n            \"currency\": \"AED\"\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}AddInvoice",
-							"host": [
-								"{{baseURL}}AddInvoice"
-							]
-						},
-						"description": "esempio con payment valorizzato\n\n```\n{\n    \"invoiceNumber\": 20240923,\n    \"payments\": [\n        {\n            \"transaction_date\": \"2024-09-23\",\n            \"transaction_description\": \"paolo\",\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\n            \"amount\": 3000.03,\n            \"currency\": \"AED\"\n        }\n    ]\n}\n\n ```\n\nesempio con payment a null\n\n```\n{\n    \"invoiceNumber\": 20240924,\n    \"payments\": null\n}\n\n ```"
-					},
-					"response": []
-				},
-				{
 					"name": "READ invoiceDetailBasicResponse",
 					"request": {
 						"method": "POST",
@@ -89,11 +65,11 @@
 				{
 					"name": "UPDATE updateInvoiceDetailBasicResponse",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"invoiceNumber\": 20240924,\r\n    \"payments\": [\r\n        {\r\n            \"transaction_date\": \"2024-09-23\",\r\n            \"transaction_description\": \"paol\",\r\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n            \"amount\": 3000.03,\r\n            \"currency\": \"AED\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\":24,\r\n    \"invoiceNumber\": 20240950\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,7 +82,36 @@
 								"{{baseURL}}UpdateInvoice"
 							]
 						},
-						"description": "per collegare un payment a un invoice gia esistente,\n\nmetti id di invoice(es.1) e valori del payment(es.transaction_date...)\n\n```\n{\n    \"id\":1,\n    \"invoiceNumber\": 20240924,\n    \"payments\": [\n        {\n            \"transaction_date\": \"2024-09-23\",\n            \"transaction_description\": \"paol\",\n            \"fkUser\": \"CCGVNLSN87H13D761R\",\n            \"amount\": 3000.03,\n            \"currency\": \"AED\"\n        }\n    ]\n}\n\n ```"
+						"description": "esempio di uso, mettere id dell'elemento che si vuole modificare (obbligatorio), e inserire i campi da modificare, con i nuovi valori, ricorda di avere payment a null\n\n```\n{\n    \"id\":18,\n    \"invoiceNumber\": 20240930\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE addPayment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"transaction_date\":\"2024-09-23\",\r\n    \"transaction_description\":\"paol\",\r\n    \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n    \"amount\": 3000.03,\r\n    \"currency\":\"AED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}AddPayment?invoiceId=30",
+							"host": [
+								"{{baseURL}}AddPayment"
+							],
+							"query": [
+								{
+									"key": "invoiceId",
+									"value": "30"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -117,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"id\":22\r\n}",
+							"raw": "{\r\n    \"id\":\"29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,7 +135,7 @@
 								"{{baseURL}}DeleteInvoice"
 							]
 						},
-						"description": "cancella l'invoice e tutti i payment collegati"
+						"description": "inserisci l'id dell'elemento che si vuole cancellare\n\nesempio\n\n```\n{\n    \"id\": \"2\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -141,7 +146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"invoiceNumber\": \"20240923\"\r\n}",
+							"raw": "{\r\n    \"invoiceNumber\": \"20250925\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,7 +159,7 @@
 								"{{baseURL}}DeleteInvoiceByInvoiceNumber"
 							]
 						},
-						"description": "Cancella solo se non ci sono payment collegati"
+						"description": "esempio di uso:\n\n```\n{\n    \"invoiceNumber\": \"20240923\"\n}\n\n ```\n\nviene preso solo l'invoiceNumber lato backend, quindi non ha senso inserire altri dati.\n\ncon questo vengono estratti tutti gli id associati e vengono fatte le varie deleteById per ognuno, questo genera una delete anche sugli elementi collegati"
 					},
 					"response": []
 				},
@@ -176,14 +181,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}invoiceDetailBasicResponseParam?invoiceNumber=20240923",
+							"raw": "{{baseURL}}invoiceDetailBasicResponseParam?invoiceNumber=20250925",
 							"host": [
 								"{{baseURL}}invoiceDetailBasicResponseParam"
 							],
 							"query": [
 								{
 									"key": "invoiceNumber",
-									"value": "20240923"
+									"value": "20250925"
 								}
 							]
 						}

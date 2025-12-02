@@ -156,37 +156,6 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/AddInvoice",
-            method = RequestMethod.PUT,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> addInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
-
-        log.info("Entering in add invoice of [{}]", invoice.getInvoiceNumber());
-
-        List<InvoiceDetailResponse> delegateResult =  null;
-        BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
-        try {
-            delegateResult= delegate.addInvoiceDetail(invoice);
-            if (!delegateResult.isEmpty() && delegateResult!=null){
-                response.setData(delegateResult);
-                //response.setTimestamp(fmt.format(new Date()));
-            } else {
-                //metti log "nessun dato trovato"
-            }
-            log.debug("result delegate.getInvoiceDetail(invoice) [{}]", response);
-        } catch (InvalidParameterException  e){
-            log.error("ERROR {} ", e.getMessage(), e);
-            throw e;
-        } catch (Exception e) {
-            log.error("ERROR {} ", e.getMessage(), e);
-
-        }
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
-    }
 
     @RequestMapping(value = "/UpdateInvoice",
     method = RequestMethod.PUT,

@@ -62,18 +62,6 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         return response;
     }
 
-    //togliere, va aggiunto in account e collegato
-    @Override
-    public List<InvoiceDetailResponse> addInvoiceDetail(Invoice invoice) {
-        log.debug("Into addInvoiceDetail");
-
-        repository.save(new Invoice(invoice));
-
-        List<Invoice> dbResult = repository.findByinvoiceNumber(invoice.getInvoiceNumber());
-        List<InvoiceDetailResponse> response = dbResultToDto(dbResult); 
-
-        return response;
-    }
 
     public void addPaymentToInvoice(Long invoiceId, Payment payment){
         Optional<Invoice> invoice = repository.findById(invoiceId);
@@ -89,9 +77,6 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         log.debug("Into updateInvoiceDetail");
 
         Optional<Invoice> currentInvoice = repository.findById(invoice.getId());
-        //vecchio metodo
-        //currentInvoice.get().setInvoiceNumber(invoice.getInvoiceNumber());
-        //currentInvoice.get().setPayments(currentInvoice.get().getPayments());
         currentInvoice.get().updateInvoice(invoice);
         repository.save(currentInvoice.get());
 
@@ -114,7 +99,15 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     public boolean deleteInvoiceDetailByCf(Invoice invoice) {
         log.debug("Into deleteInvoiceDetail for [{} - {}]",invoice.getInvoiceNumber(),invoice.getId());
 
-        repository.deleteinvoiceByinvoiceNumber(invoice.getInvoiceNumber());
+        List<Invoice> dbResult = repository.findByinvoiceNumber(invoice.getInvoiceNumber());
+
+        try {
+            for(Invoice invToDelete:dbResult){
+                repository.deleteById(invToDelete.getId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return true;
     }

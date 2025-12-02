@@ -13,7 +13,6 @@ public interface InvoiceDetailDelegate {
     List<InvoiceDetailResponse> getInvoiceDetail(Long invoiceNumber) throws InvalidParameterException ;
     List<InvoiceDetailResponse> getInvoiceDetailJPA(Long invoiceNumber) throws InvalidParameterException ;
     List<InvoiceDetailResponse> getAllJPA() throws InvalidParameterException ;
-    List<InvoiceDetailResponse> addInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
     void addPaymentToInvoice(Long invoiceId, Payment payment);
     List<InvoiceDetailResponse> updateInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
     boolean deleteInvoiceDetail(Invoice invoice) throws InvalidParameterException ;

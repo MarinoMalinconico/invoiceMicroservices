@@ -14,7 +14,7 @@ public interface InvoiceDetailDelegate {
     List<InvoiceDetailResponse> getInvoiceDetailJPA(Long invoiceNumber) throws InvalidParameterException ;
     List<InvoiceDetailResponse> getAllJPA() throws InvalidParameterException ;
     void addPaymentToInvoice(Long invoiceId, Payment payment);
-    List<InvoiceDetailResponse> updateInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
+    List<InvoiceDetailResponse> updateInvoiceDetail(Long invoiceNumber, Long invoiceId) throws InvalidParameterException ;
     boolean deleteInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
     boolean deleteInvoiceDetailByCf(Invoice invoice) throws InvalidParameterException ;
 }

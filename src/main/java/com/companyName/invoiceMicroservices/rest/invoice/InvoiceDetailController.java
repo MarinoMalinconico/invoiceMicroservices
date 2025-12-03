@@ -160,14 +160,14 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/UpdateInvoice",
     method = RequestMethod.PUT,
     produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoiceNumber(@RequestParam Long invoiceNumber, Long invoiceId) throws InvalidParameterException {
 
-        log.info("Entering in invoice update of [{}]",invoice.getInvoiceNumber());
+        log.info("Entering in invoice update of [{}]",invoiceNumber);
 
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult = delegate.updateInvoiceDetail(invoice);
+            delegateResult = delegate.updateInvoiceDetail(invoiceNumber,invoiceId);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));

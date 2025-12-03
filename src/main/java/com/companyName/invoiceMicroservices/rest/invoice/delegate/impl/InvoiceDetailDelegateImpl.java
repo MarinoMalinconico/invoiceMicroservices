@@ -5,6 +5,7 @@ import com.companyName.coreMicroservices.repository.entity.Invoice;
 import com.companyName.coreMicroservices.repository.entity.Payment;
 import com.companyName.invoiceMicroservices.rest.invoice.delegate.InvoiceDetailDelegate;
 import com.companyName.invoiceMicroservices.rest.invoice.model.response.InvoiceDetailResponse;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,14 +74,15 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     }
 
     @Override
-    public List<InvoiceDetailResponse> updateInvoiceDetail(Invoice invoice) {
+    @Transactional
+    public List<InvoiceDetailResponse> updateInvoiceDetail(Long invoiceNumber, Long invoiceId) {
         log.debug("Into updateInvoiceDetail");
 
-        Optional<Invoice> currentInvoice = repository.findById(invoice.getId());
-        currentInvoice.get().updateInvoice(invoice);
-        repository.save(currentInvoice.get());
-
-        List<Invoice> dbResult = repository.findByinvoiceNumber(invoice.getInvoiceNumber());
+        Optional<Invoice> currentInvoice = repository.findById(invoiceId);
+        currentInvoice.ifPresent(invoice -> invoice.setInvoiceNumber(invoiceNumber));
+        //il transactional fa la save
+        //repository.save(currentInvoice.get());
+        List<Invoice> dbResult = repository.findByinvoiceNumber(invoiceNumber);
         List<InvoiceDetailResponse> response = dbResultToDto(dbResult);
 
         return response;

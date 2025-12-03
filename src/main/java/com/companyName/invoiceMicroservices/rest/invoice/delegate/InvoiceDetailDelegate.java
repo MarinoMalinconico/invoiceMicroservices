@@ -16,5 +16,5 @@ public interface InvoiceDetailDelegate {
     void addPaymentToInvoice(Long invoiceId, Payment payment);
     List<InvoiceDetailResponse> updateInvoiceDetail(Long invoiceNumber, Long invoiceId) throws InvalidParameterException ;
     boolean deleteInvoiceDetail(Invoice invoice) throws InvalidParameterException ;
-    boolean deleteInvoiceDetailByCf(Invoice invoice) throws InvalidParameterException ;
+    boolean deleteInvoiceDetailByInvoiceNumber(Invoice invoice) throws InvalidParameterException ;
 }

@@ -80,8 +80,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
 
         Optional<Invoice> currentInvoice = repository.findById(invoiceId);
         currentInvoice.ifPresent(invoice -> invoice.setInvoiceNumber(invoiceNumber));
-        //il transactional fa la save
-        //repository.save(currentInvoice.get());
+
         List<Invoice> dbResult = repository.findByinvoiceNumber(invoiceNumber);
         List<InvoiceDetailResponse> response = dbResultToDto(dbResult);
 
@@ -98,7 +97,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     }
 
     @Override
-    public boolean deleteInvoiceDetailByCf(Invoice invoice) {
+    public boolean deleteInvoiceDetailByInvoiceNumber(Invoice invoice) {
         log.debug("Into deleteInvoiceDetail for [{} - {}]",invoice.getInvoiceNumber(),invoice.getId());
 
         List<Invoice> dbResult = repository.findByinvoiceNumber(invoice.getInvoiceNumber());

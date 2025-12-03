@@ -27,7 +27,7 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponse",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponse(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumber(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
 
         log.info("Entering in invoiceDetail service - PathVariable: [{}]", invoice.getInvoiceNumber());
 
@@ -61,7 +61,7 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponse(@RequestParam Long invoiceNumber) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseParam(@RequestParam Long invoiceNumber) throws InvalidParameterException {
 
         log.info("Entering in invoiceDetail service(param) - PathVariable: [{}]", invoiceNumber);
 
@@ -127,7 +127,7 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponseParamAll",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGET() throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGetAll() throws InvalidParameterException {
 
         log.info("Entering in invoiceDetail service(param)(JPA)(all)");
 
@@ -191,7 +191,7 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/AddPayment",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestBody Payment payment,@RequestParam Long invoiceId) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> AddPayment(@RequestBody Payment payment,@RequestParam Long invoiceId) throws InvalidParameterException {
 
         log.info("Entering in AddPayment [{}]",invoiceId);
 
@@ -251,7 +251,7 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/DeleteInvoiceByInvoiceNumber",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> deleteInvoiceByCf(@RequestBody Invoice invoice) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> DeleteInvoiceByInvoiceNumber(@RequestBody Invoice invoice) throws InvalidParameterException {
 
         log.info("Entering in invoice delete of [{}]",invoice.getInvoiceNumber());
 
@@ -261,7 +261,7 @@ public class InvoiceDetailController {
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
             delegateResult= delegate.getInvoiceDetailJPA(invoice.getInvoiceNumber());
-            deleted=delegate.deleteInvoiceDetailByCf(invoice);
+            deleted=delegate.deleteInvoiceDetailByInvoiceNumber(invoice);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));

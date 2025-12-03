@@ -69,7 +69,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":24,\r\n    \"invoiceNumber\": 20240950\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,12 +77,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}UpdateInvoice",
+							"raw": "{{baseURL}}UpdateInvoice?invoiceNumber=20250923&invoiceId=31",
 							"host": [
 								"{{baseURL}}UpdateInvoice"
+							],
+							"query": [
+								{
+									"key": "invoiceNumber",
+									"value": "20250923"
+								},
+								{
+									"key": "invoiceId",
+									"value": "31"
+								}
 							]
 						},
-						"description": "esempio di uso, mettere id dell'elemento che si vuole modificare (obbligatorio), e inserire i campi da modificare, con i nuovi valori, ricorda di avere payment a null\n\n```\n{\n    \"id\":18,\n    \"invoiceNumber\": 20240930\n}\n\n ```"
+						"description": "esempio di uso, mettere id dell'elemento che si vuole modificare (invoiceId) (obbligatorio), e inserire i campi da modificare (invoiceNumber), con i nuovi valori, ricorda di avere payment a null.\n\nesempio in Bulk Edit\n\n```\ninvoiceNumber:20250923\ninvoiceId:31\n\n ```"
 					},
 					"response": []
 				},

@@ -103,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"transaction_date\":\"2024-09-23\",\r\n    \"transaction_description\":\"paol\",\r\n    \"fkUser\": \"CCGVNLSN87H13D761R\",\r\n    \"amount\": 3000.03,\r\n    \"currency\":\"AED\"\r\n}",
+							"raw": "{\r\n    \"transaction_date\":\"2024-09-23\",\r\n    \"transaction_description\":\"paol\",\r\n    \"fkUser\": \"CCGVNLSN87H13D762R\",\r\n    \"amount\": 3000.03,\r\n    \"currency\":\"AED\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,7 +121,8 @@
 									"value": "30"
 								}
 							]
-						}
+						},
+						"description": "esempio di uso\n\n```\n{\n    \"transaction_date\":\"2024-09-23\",\n    \"transaction_description\":\"paol\",\n    \"fkUser\": \"CCGVNLSN87H13D761R\",\n    \"amount\": 3000.03,\n    \"currency\":\"AED\"\n}\n\n ```"
 					},
 					"response": []
 				},

@@ -79,10 +79,10 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         log.debug("Into updateInvoiceDetail");
 
         Optional<Invoice> currentInvoice = repository.findById(invoiceId);
-        currentInvoice.ifPresent(invoice -> invoice.setInvoiceNumber(invoiceNumber));
+        currentInvoice.ifPresent(invoice -> invoice.setInvoiceNumber(invoiceNumber != null ? invoiceNumber : currentInvoice.get().getInvoiceNumber()));
 
-        List<Invoice> dbResult = repository.findByinvoiceNumber(invoiceNumber);
-        List<InvoiceDetailResponse> response = dbResultToDto(dbResult);
+        Optional<Invoice> dbResult = repository.findById(invoiceId);
+        List<InvoiceDetailResponse> response = dbResultToDto(dbResult.stream().toList());
 
         return response;
     }

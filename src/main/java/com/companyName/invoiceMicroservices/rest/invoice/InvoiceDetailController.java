@@ -34,7 +34,7 @@ public class InvoiceDetailController {
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetail(invoice.getInvoiceNumber());
+            delegateResult= delegate.getInvoiceByInvoiceNumber(invoice.getInvoiceNumber());
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
@@ -57,6 +57,7 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
+    /* DEPRECATO
     //con path parameter
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.POST,
@@ -88,20 +89,19 @@ public class InvoiceDetailController {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
-    }
+    }*/
 
-    //get con read e jpa
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGET(@RequestParam Long invoiceNumber) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumberPathParam(@RequestParam Long invoiceNumber) throws InvalidParameterException {
 
-        log.info("Entering in invoiceDetail service(param)(JPA) - PathVariable: [{}]", invoiceNumber);
+        log.info("Entering in invoiceDetailBasicResponseByInvoiceNumberPathParam - PathVariable: [{}]", invoiceNumber);
 
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(invoiceNumber);
+            delegateResult= delegate.getInvoiceByInvoiceNumber(invoiceNumber);
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
@@ -123,7 +123,6 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    //get all jpa
     @RequestMapping(value = "/invoiceDetailBasicResponseParamAll",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -134,7 +133,7 @@ public class InvoiceDetailController {
         List<InvoiceDetailResponse> delegateResult =  null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getAllJPA();
+            delegateResult= delegate.getAllInvoiceList();
             if (!delegateResult.isEmpty() && delegateResult!=null){
                 response.setData(delegateResult);
                 //response.setTimestamp(fmt.format(new Date()));
@@ -225,7 +224,7 @@ public class InvoiceDetailController {
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(invoice.getInvoiceNumber());
+            delegateResult= delegate.getInvoiceByInvoiceNumber(invoice.getInvoiceNumber());
             deleted=delegate.deleteInvoiceDetail(invoice);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);
@@ -260,7 +259,7 @@ public class InvoiceDetailController {
         List<InvoiceDetailResponse> delegateResult = null;
         BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
         try {
-            delegateResult= delegate.getInvoiceDetailJPA(invoice.getInvoiceNumber());
+            delegateResult= delegate.getInvoiceByInvoiceNumber(invoice.getInvoiceNumber());
             deleted=delegate.deleteInvoiceDetailByInvoiceNumber(invoice);
             if (!delegateResult.isEmpty() && delegateResult != null) {
                 response.setData(delegateResult);

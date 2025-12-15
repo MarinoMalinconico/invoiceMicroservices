@@ -21,6 +21,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     @Autowired
     InvoiceRepository repository;
 
+    /* DEPRECATO
     @Override
     public List<InvoiceDetailResponse> getInvoiceDetail(Long invoiceNumber) {
         log.debug("Into getInvoiceDetail delegate with PathParameter [{}]", invoiceNumber);
@@ -29,7 +30,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
         List<InvoiceDetailResponse> response = dbResultToDto(dbResult);
 
         return response;
-    }
+    }*/
 
     private List<InvoiceDetailResponse> dbResultToDto(List<Invoice> dtos) {
         List<InvoiceDetailResponse> formattedDTOs = new ArrayList<>();
@@ -44,7 +45,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     }
 
     @Override
-    public List<InvoiceDetailResponse> getInvoiceDetailJPA(Long invoiceNumber) {
+    public List<InvoiceDetailResponse> getInvoiceByInvoiceNumber(Long invoiceNumber) {
         log.debug("Into getInvoiceDetail delegate with PathParameter [{}]", invoiceNumber);
 
         List<Invoice> dbResult = repository.findByinvoiceNumber(invoiceNumber);
@@ -54,7 +55,7 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     }
 
     @Override
-    public List<InvoiceDetailResponse> getAllJPA() {
+    public List<InvoiceDetailResponse> getAllInvoiceList() {
         log.debug("Into getInvoiceDetail delegate with all");
 
         List<Invoice> dbResult = repository.findAll();

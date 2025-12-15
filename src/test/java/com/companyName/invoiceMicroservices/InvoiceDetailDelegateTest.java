@@ -1,4 +1,5 @@
 package com.companyName.invoiceMicroservices;
+
 import com.companyName.coreMicroservices.repository.InvoiceRepository;
 import com.companyName.coreMicroservices.repository.entity.Invoice;
 import com.companyName.coreMicroservices.repository.entity.Payment;
@@ -9,16 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,7 +52,7 @@ public class InvoiceDetailDelegateTest {
 
         when(repository.findAll()).thenReturn(saved);
 
-        List<InvoiceDetailResponse> iDr = delegate.getAllJPA();
+        List<InvoiceDetailResponse> iDr = delegate.getAllInvoiceList();
 
         assertEquals(iDr.get(0).getId(), saved.get(0).getId(),"OK ID");
         assertEquals(iDr.get(0).getInvoiceNumber(), saved.get(0).getInvoiceNumber(),"OK INVOICE NUMBER");

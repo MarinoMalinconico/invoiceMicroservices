@@ -34,35 +34,6 @@
 					"response": []
 				},
 				{
-					"name": "READ PATH invoiceDetailBasicResponse parameter",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}invoiceDetailBasicResponseParam?invoiceNumber=20240923",
-							"host": [
-								"{{baseURL}}invoiceDetailBasicResponseParam"
-							],
-							"query": [
-								{
-									"key": "invoiceNumber",
-									"value": "20240923"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "UPDATE updateInvoiceDetailBasicResponse",
 					"request": {
 						"method": "PUT",

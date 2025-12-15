@@ -57,40 +57,6 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    /* DEPRECATO
-    //con path parameter
-    @RequestMapping(value = "/invoiceDetailBasicResponseParam",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseParam(@RequestParam Long invoiceNumber) throws InvalidParameterException {
-
-        log.info("Entering in invoiceDetail service(param) - PathVariable: [{}]", invoiceNumber);
-
-        List<InvoiceDetailResponse> delegateResult =  null;
-        BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
-        try {
-            delegateResult= delegate.getInvoiceDetail(invoiceNumber);
-            if (!delegateResult.isEmpty() && delegateResult!=null){
-                response.setData(delegateResult);
-                //response.setTimestamp(fmt.format(new Date()));
-            } else {
-                //metti log "nessun dato trovato"
-            }
-            log.debug("result delegate.getInvoiceDetail(invoice) [{}]", response);
-        } catch (InvalidParameterException  e){
-            log.error("ERROR {} ", e.getMessage(), e);
-            throw e;
-        } catch (Exception e) {
-            log.error("ERROR {} ", e.getMessage(), e);
-
-        }
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
-    }*/
-
     @RequestMapping(value = "/invoiceDetailBasicResponseParam",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

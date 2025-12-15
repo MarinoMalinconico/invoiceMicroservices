@@ -10,8 +10,6 @@ import java.util.List;
 
 public interface InvoiceDetailDelegate {
 
-    /* DEPRECATO
-    List<InvoiceDetailResponse> getInvoiceDetail(Long invoiceNumber) throws InvalidParameterException ;*/
     List<InvoiceDetailResponse> getInvoiceByInvoiceNumber(Long invoiceNumber) throws InvalidParameterException ;
     List<InvoiceDetailResponse> getAllInvoiceList() throws InvalidParameterException ;
     void addPaymentToInvoice(Long invoiceId, Payment payment);

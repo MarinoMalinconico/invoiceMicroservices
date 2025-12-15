@@ -21,17 +21,6 @@ public class InvoiceDetailDelegateImpl implements InvoiceDetailDelegate {
     @Autowired
     InvoiceRepository repository;
 
-    /* DEPRECATO
-    @Override
-    public List<InvoiceDetailResponse> getInvoiceDetail(Long invoiceNumber) {
-        log.debug("Into getInvoiceDetail delegate with PathParameter [{}]", invoiceNumber);
-
-        List<Invoice> dbResult = repository.getAllInvoicePerUser(invoiceNumber);
-        List<InvoiceDetailResponse> response = dbResultToDto(dbResult);
-
-        return response;
-    }*/
-
     private List<InvoiceDetailResponse> dbResultToDto(List<Invoice> dtos) {
         List<InvoiceDetailResponse> formattedDTOs = new ArrayList<>();
         for (Invoice dto : dtos) {

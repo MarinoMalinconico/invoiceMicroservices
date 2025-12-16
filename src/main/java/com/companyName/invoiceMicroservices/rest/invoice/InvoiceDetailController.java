@@ -2,7 +2,7 @@ package com.companyName.invoiceMicroservices.rest.invoice;
 
 import com.companyName.coreMicroservices.repository.entity.Invoice;
 import com.companyName.coreMicroservices.repository.entity.Payment;
-import com.companyName.invoiceMicroservices.common.model.BasicResponse;
+import com.companyName.coreMicroservices.model.BasicResponse;
 import com.companyName.invoiceMicroservices.rest.invoice.delegate.InvoiceDetailDelegate;
 import com.companyName.invoiceMicroservices.rest.invoice.exceptions.InvoiceDetailException;
 import com.companyName.invoiceMicroservices.rest.invoice.model.request.InvoiceDetailRequest;

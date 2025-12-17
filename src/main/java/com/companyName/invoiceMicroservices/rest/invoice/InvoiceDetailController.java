@@ -24,7 +24,7 @@ public class InvoiceDetailController {
     @Autowired
     InvoiceDetailDelegate delegate;
 
-    @RequestMapping(value = "/invoiceDetailBasicResponse",
+    @RequestMapping(value = "/invoiceDetailBasicResponseByInvoiceNumber",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumber(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
@@ -57,7 +57,7 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/invoiceDetailBasicResponseParam",
+    @RequestMapping(value = "/invoiceDetailBasicResponseByInvoiceNumberPathParam",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumberPathParam(@RequestParam Long invoiceNumber) throws InvalidParameterException {
@@ -89,7 +89,7 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/invoiceDetailBasicResponseParamAll",
+    @RequestMapping(value = "/invoiceDetailBasicResponseGetAll",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseGetAll() throws InvalidParameterException {
@@ -122,10 +122,10 @@ public class InvoiceDetailController {
     }
 
 
-    @RequestMapping(value = "/UpdateInvoice",
+    @RequestMapping(value = "/updateInvoice",
     method = RequestMethod.PUT,
     produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoiceNumber(@RequestParam Long invoiceNumber, Long invoiceId) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> updateInvoice(@RequestParam Long invoiceNumber, Long invoiceId) throws InvalidParameterException {
 
         log.info("Entering in invoice update of [{}]",invoiceNumber);
 
@@ -153,10 +153,10 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/AddPayment",
+    @RequestMapping(value = "/addPayment",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> AddPayment(@RequestBody Payment payment,@RequestParam Long invoiceId) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> addPayment(@RequestBody Payment payment,@RequestParam Long invoiceId) throws InvalidParameterException {
 
         log.info("Entering in AddPayment [{}]",invoiceId);
 
@@ -178,7 +178,7 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/DeleteInvoice",
+    @RequestMapping(value = "/deleteInvoice",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> deleteInvoice(@RequestBody Invoice invoice) throws InvalidParameterException {
@@ -213,10 +213,10 @@ public class InvoiceDetailController {
                 .body(response);
     }
 
-    @RequestMapping(value = "/DeleteInvoiceByInvoiceNumber",
+    @RequestMapping(value = "/deleteInvoiceByInvoiceNumber",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> DeleteInvoiceByInvoiceNumber(@RequestBody Invoice invoice) throws InvalidParameterException {
+    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> deleteInvoiceByInvoiceNumber(@RequestBody Invoice invoice) throws InvalidParameterException {
 
         log.info("Entering in invoice delete of [{}]",invoice.getInvoiceNumber());
 

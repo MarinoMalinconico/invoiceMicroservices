@@ -25,9 +25,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}invoiceDetailBasicResponse",
+							"raw": "{{baseURL}}invoiceDetailBasicResponseByInvoiceNumber",
 							"host": [
-								"{{baseURL}}invoiceDetailBasicResponse"
+								"{{baseURL}}invoiceDetailBasicResponseByInvoiceNumber"
 							]
 						}
 					},
@@ -48,9 +48,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}UpdateInvoice?invoiceNumber=20250923&invoiceId=31",
+							"raw": "{{baseURL}}updateInvoice?invoiceNumber=20250923&invoiceId=31",
 							"host": [
-								"{{baseURL}}UpdateInvoice"
+								"{{baseURL}}updateInvoice"
 							],
 							"query": [
 								{
@@ -82,9 +82,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}AddPayment?invoiceId=30",
+							"raw": "{{baseURL}}addPayment?invoiceId=30",
 							"host": [
-								"{{baseURL}}AddPayment"
+								"{{baseURL}}addPayment"
 							],
 							"query": [
 								{
@@ -112,9 +112,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}DeleteInvoice",
+							"raw": "{{baseURL}}deleteInvoice",
 							"host": [
-								"{{baseURL}}DeleteInvoice"
+								"{{baseURL}}deleteInvoice"
 							]
 						},
 						"description": "inserisci l'id dell'elemento che si vuole cancellare\n\nesempio\n\n```\n{\n    \"id\": \"2\"\n}\n\n ```"
@@ -136,9 +136,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}DeleteInvoiceByInvoiceNumber",
+							"raw": "{{baseURL}}deleteInvoiceByInvoiceNumber",
 							"host": [
-								"{{baseURL}}DeleteInvoiceByInvoiceNumber"
+								"{{baseURL}}deleteInvoiceByInvoiceNumber"
 							]
 						},
 						"description": "esempio di uso:\n\n```\n{\n    \"invoiceNumber\": \"20240923\"\n}\n\n ```\n\nviene preso solo l'invoiceNumber lato backend, quindi non ha senso inserire altri dati.\n\ncon questo vengono estratti tutti gli id associati e vengono fatte le varie deleteById per ognuno, questo genera una delete anche sugli elementi collegati"
@@ -163,9 +163,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}invoiceDetailBasicResponseParam?invoiceNumber=20250925",
+							"raw": "{{baseURL}}invoiceDetailBasicResponseByInvoiceNumberPathParam?invoiceNumber=20250925",
 							"host": [
-								"{{baseURL}}invoiceDetailBasicResponseParam"
+								"{{baseURL}}invoiceDetailBasicResponseByInvoiceNumberPathParam"
 							],
 							"query": [
 								{
@@ -195,9 +195,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}invoiceDetailBasicResponseParamAll",
+							"raw": "{{baseURL}}invoiceDetailBasicResponseGetAll",
 							"host": [
-								"{{baseURL}}invoiceDetailBasicResponseParamAll"
+								"{{baseURL}}invoiceDetailBasicResponseGetAll"
 							]
 						}
 					},

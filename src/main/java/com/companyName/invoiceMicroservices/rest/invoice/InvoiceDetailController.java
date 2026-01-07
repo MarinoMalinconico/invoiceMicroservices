@@ -1,5 +1,6 @@
 package com.companyName.invoiceMicroservices.rest.invoice;
 
+import com.companyName.coreMicroservices.model.ExtendedResponse;
 import com.companyName.coreMicroservices.repository.entity.Invoice;
 import com.companyName.coreMicroservices.repository.entity.Payment;
 import com.companyName.coreMicroservices.model.BasicResponse;
@@ -27,12 +28,12 @@ public class InvoiceDetailController {
     @RequestMapping(value = "/invoiceDetailBasicResponseByInvoiceNumber",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BasicResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumber(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
+    public @ResponseBody ResponseEntity<ExtendedResponse<List<InvoiceDetailResponse>>> invoiceDetailBasicResponseByInvoiceNumber(@RequestBody InvoiceDetailRequest invoice) throws InvalidParameterException, InvoiceDetailException {
 
         log.info("Entering in invoiceDetail service - PathVariable: [{}]", invoice.getInvoiceNumber());
 
         List<InvoiceDetailResponse> delegateResult =  null;
-        BasicResponse<List<InvoiceDetailResponse>> response = new BasicResponse<>();
+        ExtendedResponse<List<InvoiceDetailResponse>> response = new ExtendedResponse<>();
         try {
             delegateResult= delegate.getInvoiceByInvoiceNumber(invoice.getInvoiceNumber());
             if (!delegateResult.isEmpty() && delegateResult!=null){

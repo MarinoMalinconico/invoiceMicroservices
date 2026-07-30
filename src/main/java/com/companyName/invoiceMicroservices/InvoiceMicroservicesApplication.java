@@ -3,6 +3,7 @@ package com.companyName.invoiceMicroservices;
 import com.companyName.coreMicroservices.repository.InvoiceRepository;
 import com.companyName.coreMicroservices.repository.entity.Invoice;
 import com.companyName.coreMicroservices.repository.entity.Payment;
+import com.companyName.coreMicroservices.aop.TimestampAspectAdvice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Import;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,6 +24,7 @@ import java.util.List;
 @AutoConfiguration
 @EntityScan(basePackages = "com.companyName.coreMicroservices.repository.entity")
 @EnableJpaRepositories(basePackages = "com.companyName.coreMicroservices.repository")
+@Import(TimestampAspectAdvice.class)
 public class InvoiceMicroservicesApplication implements CommandLineRunner {
 
     @Autowired
